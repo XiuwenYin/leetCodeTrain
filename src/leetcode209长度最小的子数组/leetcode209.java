@@ -11,6 +11,6 @@ public class leetcode209 {
                 left++;
             }
         }
-        return res == Integer.MAX_VALUE ? 0 : res;
+        return res == Integer.MAX_VALUE ? 0 : res + 1; // 长度需要加1
     }
 }
