@@ -23,6 +23,6 @@ public class leetcode862 {
             }
             queue.offerLast(i); // 进queue
         }
-        return  res <= n ? res : -1;
+        return res <= n ? res : -1;
     }
 }
