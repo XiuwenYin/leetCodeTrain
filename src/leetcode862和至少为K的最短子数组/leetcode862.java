@@ -4,6 +4,12 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class leetcode862 {
+    /**
+     * 前缀和 + 单调队列（滑动窗口样式）
+     * @param nums
+     * @param k
+     * @return
+     */
     public int shortestSubarray(int[] nums, int k) {
         int n = nums.length;
         int res = n + 1;
