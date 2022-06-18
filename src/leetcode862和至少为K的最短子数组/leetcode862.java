@@ -6,6 +6,7 @@ import java.util.Deque;
 public class leetcode862 {
     /**
      * 前缀和 + 单调队列（滑动窗口样式）
+     *
      * @param nums
      * @param k
      * @return
@@ -28,6 +29,30 @@ public class leetcode862 {
                 queue.pollLast();
             }
             queue.offerLast(i); // 进queue
+        }
+        return res <= n ? res : -1;
+    }
+
+
+    /**
+     * 练习
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int shortestSubarray01(int[] nums, int k) {
+        int n = nums.length;
+        int res = n + 1;
+        long[] sum = new long[n + 1];
+        for (int i = 0; i < n; i++) sum[i + 1] = nums[i] + sum[i];
+        Deque<Integer> q = new ArrayDeque<>();
+        for (int i = 0; i < n + 1; i++) {
+            // 左出
+            while (!q.isEmpty() && sum[i] - sum[q.peekFirst()] >= k) res = Math.min(res, i - q.pollFirst());
+            // 右出
+            while (!q.isEmpty() && sum[q.peekLast()] >= sum[i]) q.pollLast();
+            q.offerLast(i); // 进queue
         }
         return res <= n ? res : -1;
     }
