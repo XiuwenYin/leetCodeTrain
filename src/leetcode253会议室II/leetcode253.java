@@ -20,7 +20,7 @@ public class leetcode253 {
         // 将interval中第0位的数组存入minHeap中
         minHeap.offer(intervals[0]);
         for (int i = 1; i < intervals.length; i++) {
-            if (minHeap.size() > 0 && minHeap.peek()[1] <= intervals[i][0]) {
+            if (!minHeap.isEmpty() && minHeap.peek()[1] <= intervals[i][0]) {
                 minHeap.poll();
             }
             minHeap.offer(intervals[i]);
@@ -60,12 +60,12 @@ public class leetcode253 {
         }
         Arrays.sort(start);
         Arrays.sort(end);
-        int res = 0, levelEnd = 0;
+        int res = 0, level = 0;
         for (int i = 0; i < n; i++) {
-            if (start[i] < end[levelEnd]) {
+            if (start[i] < end[level]) {
                 res++;
             } else {
-                levelEnd++;
+                level++;
             }
         }
         return res;
