@@ -47,8 +47,11 @@ public class leetcode253 {
         return res;
     }
 
-    /*
-    扫描线法
+    /**
+     * 扫描线法
+     * 推荐
+     * @param intervals
+     * @return
      */
     public int minMeetingRooms02(int[][] intervals) {
         int n = intervals.length;
@@ -61,14 +64,19 @@ public class leetcode253 {
         Arrays.sort(start);
         Arrays.sort(end);
         int res = 0, level = 0;
+        // 这种不好理解
+        /*for (int i = 0; i < n; i++) {
+            if (start[i] < end[level]) res++;
+            else level++;
+        }*/
+        // 这种好理解
         for (int i = 0; i < n; i++) {
-            if (start[i] < end[level]) {
-                res++;
-            } else {
+            res++;
+            if (end[level] <= start[i]) { // 当前end小于等于下一个start时可以重复使用这个房间，所以res--
+                res--;
                 level++;
             }
         }
         return res;
     }
-
 }

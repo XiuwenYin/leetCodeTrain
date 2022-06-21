@@ -7,8 +7,8 @@ public class leetcode11 {
         while (left < right) {
             int area = (right - left) * Math.min(height[left], height[right]);
             res = Math.max(res, area);
-            if (height[left] > height[right]) right--;
-            else left++;
+            if (height[left] < height[right]) left++;
+            else right--;
         }
         return res;
     }

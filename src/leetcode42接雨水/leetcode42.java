@@ -38,6 +38,7 @@ public class leetcode42 {
 
     /**
      * DP
+     *  !!理解这个最好，也容易理解!!
      * 使用两个数组，分别表示第i位置左边或者右边的最大高度
      * 左最大：比较 i 的前一位最大高度和 i 的前一位墙的高度，从左到右遍历
      * 右最大：比较 i 的后一位最大高度和 i 的后一位墙的高度，从右到左遍历
@@ -54,7 +55,7 @@ public class leetcode42 {
             maxLeft[i] = Math.max(maxLeft[i - 1], height[i - 1]);
         }
         // 求 maxRight
-        for (int i = height.length - 2; i >= 0; i--) {
+        for (int i = height.length - 2; i >= 0; i--) { // 注意边界条件
             maxRight[i] = Math.max(maxRight[i + 1], height[i + 1]);
         }
         for (int i = 1; i < height.length - 1; i++) {
