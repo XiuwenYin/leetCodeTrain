@@ -1,5 +1,7 @@
 package leetcode490迷宫;
 
+import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -36,4 +38,36 @@ public class leetcode490 {
         }
         return false;
     }
+
+    public boolean hasPath01(int[][] maze, int[] start, int[] destination) {
+        int m = maze.length, n = maze[0].length;
+        Queue<int[]> q = new ArrayDeque<>();
+        boolean[][] visited = new boolean[m][n];
+        visited[start[0]][start[1]] = true;
+        if (maze[start[0]][start[1]] == 0) {
+            q.offer(new int[]{start[0], start[1]});
+        } else {
+            return false;
+        }
+        while (!q.isEmpty()) {
+            int[] cur = q.poll();
+            if (Arrays.equals(cur, destination)) return true;
+            for (int[] dirt : dirts) {
+                int x = cur[0] + dirt[0];
+                int y = cur[1] + dirt[1];
+                while (x >= 0 && x < m && y >=0 && y < n && maze[x][y] != 1) {
+                    x += dirt[0];
+                    y += dirt[1];
+                }
+                x -= dirt[0];
+                y -= dirt[1];
+                if (!visited[x][y]) {
+                    q.offer(new int[] {x, y});
+                    visited[x][y] = true;
+                }
+            }
+        }
+        return false;
+    }
+
 }

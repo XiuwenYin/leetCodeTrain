@@ -54,7 +54,7 @@ public class leetcode102 {
 
 
     /**
-     * dfs 了解即可
+     * dfs 有趣
      * @param root
      * @return
      */
@@ -68,12 +68,16 @@ public class leetcode102 {
         if (root == null) return;
         if (height > res.size()) res.add(new ArrayList<>());
 
-        res.get(height).add(root.val);
-
+        res.get(height).add(root.val); // 精髓，先get每一层level，再add
+        // 两个判断甚至可以不需要，因为结束条件限制了即使重新开一层也会被return
         if (root.left != null) dfs(root.left, res, height + 1);
         if (root.right != null) dfs(root.right, res, height + 1);
     }
 
 
-
+//    private void test() {
+//        String s = "Hello World";
+//        StringJoiner sj = new StringJoiner(",", "[", "]");
+//        StringBuilder sb = new StringBuilder(",");
+//    }
 }

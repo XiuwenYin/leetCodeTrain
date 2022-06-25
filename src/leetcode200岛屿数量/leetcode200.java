@@ -1,10 +1,10 @@
 package leetcode200岛屿数量;
 
 public class leetcode200 {
-    int res = 0;
     public int numIslands(char[][] grid) {
         // 获取长度
         int m = grid.length, n = grid[0].length;
+        int res = 0;
         // 遍历整个grid
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -32,5 +32,49 @@ public class leetcode200 {
         dfs(grid, r - 1, c);
         dfs(grid, r, c + 1);
         dfs(grid, r, c - 1);
+    }
+
+    /**
+     * 并查集 union find
+     */
+    int[][] dirts = new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
+    public int numIslands01(char[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        int res = 0;
+        DSU dsu = new DSU(m * n);
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == '1') {
+                    res++;
+                    for (int[] dirt : dirts) {
+                        int x = i + dirt[0], y = j + dirt[1];
+                        if (x >= 0 && x < m && y >= 0 && y < n && grid[x][y] == '1') {
+                            if (dsu.find(x * n + y) != dsu.find(i * n + j)) res--;
+                            dsu.union(x * n + y, i * n + j);
+                        }
+                    }
+                }
+            }
+        }
+        return res;
+    }
+
+    class DSU {
+        int[] parent;
+
+        public DSU(int n) {
+            parent = new int[n];
+            for (int i = 0; i < n; i++) parent[i] = i;
+        }
+
+        public int find(int x) {
+            if (parent[x] != x) parent[x] = find(parent[x]);
+            return parent[x];
+        }
+
+        public void union(int x, int y) {
+            parent[find(x)] = find(y);
+        }
     }
 }
