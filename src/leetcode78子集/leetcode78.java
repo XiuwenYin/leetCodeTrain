@@ -6,7 +6,7 @@ import java.util.List;
 public class leetcode78 {
     /**
      * dfs
-     *
+     * 这样空集为res的最后一位元素
      * @param nums
      * @return
      */
@@ -32,7 +32,7 @@ public class leetcode78 {
 
     /**
      * 同一种dfs
-     *
+     * 这样是空集为res的第一个元素
      * @param nums
      * @return
      */
@@ -53,6 +53,7 @@ public class leetcode78 {
 
     /**
      * mask
+     * 这个顺序和结果顺序一样，子集元素数量少在前，元素数量多在后
      */
     public List<List<Integer>> subsets02(int[] nums) {
         int totalNum = 1 << nums.length;

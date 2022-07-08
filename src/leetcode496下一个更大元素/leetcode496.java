@@ -1,19 +1,24 @@
 package leetcode496下一个更大元素;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
 // 下一个更大元素
-/**
- * 单调栈
- */
+
 public class leetcode496 {
+    /**
+     * 单调栈
+     * @param nums1
+     * @param nums2
+     * @return
+     */
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         // 创建 hashTable用于存储单调栈结果，key是num2数组元素，value是下一个更大元素
         Map<Integer, Integer> hashMap = new HashMap<Integer, Integer>();
-        // 创建栈，用于单调栈
+        // 创建栈，用于单调
         Deque<Integer> stack = new LinkedList<Integer>();
         int n1 = nums1.length, n2 = nums2.length;
         // 单调栈模板；反向遍历 nums2

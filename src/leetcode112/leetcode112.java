@@ -61,4 +61,24 @@ public class leetcode112 {
         return hasPathSum(root.left, targetSum - root.val) || hasPathSum(root.right, targetSum - root.val);
     }
 
+
+    /**
+     * dfs练习
+     * @param root
+     * @param targetSum
+     * @return
+     */
+    public boolean hasPathSum01(TreeNode root, int targetSum) {
+        return dfs(root, targetSum);
+    }
+
+    public boolean dfs(TreeNode root, int k) {
+        if (root == null) return false;
+        if (root.left == null && root.right == null) {
+            return root.val == k;
+        }
+        k -= root.val;
+        return dfs(root.left, k) || dfs(root.right, k);
+    }
+
 }

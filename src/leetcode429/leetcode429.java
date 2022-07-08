@@ -33,7 +33,7 @@ public class leetcode429 {
             for (int i = 0; i < size; i++) {
                 Node temp = queue.poll();
                 level.add(temp.val);
-                queue.addAll(temp.children);
+                queue.addAll(temp.children); // 或者用 for-each遍历temp.children, 然后逐个加入q
             }
             res.add(level);
         }
