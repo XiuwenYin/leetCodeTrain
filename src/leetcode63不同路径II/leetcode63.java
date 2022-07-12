@@ -1,10 +1,10 @@
-package leetcode63;
+package leetcode63不同路径II;
 
 public class leetcode63 {
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
         int m = obstacleGrid.length, n = obstacleGrid[0].length;
         int[][] dp = new int[m][n];
-        for (int i = 0; i < m && obstacleGrid[i][0] == 0; i++) {
+        for (int i = 0; i < m && obstacleGrid[i][0] == 0; i++) { // 这里就在这判断，不要单独列出来用if
             dp[i][0] = 1;
         }
         for (int j = 0; j < n && obstacleGrid[0][j] == 0; j++) {

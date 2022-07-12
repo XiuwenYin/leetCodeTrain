@@ -35,32 +35,32 @@ public class leetcode215 {
         return nums[n - k];
     }
 
-    private void divide(int[] nums, int left, int right, int k) {
-        int n = nums.length;
+    private void divide(int[] arr, int left, int right, int k) {
+        int n = arr.length;
         if (left >= right) return;
-        int position = partition(nums, left, right);
-        // 这个 n - k 是targetPosition
+        int position = partition(arr, left, right);
+        // 如果找到n-k则直接返回，这个 n - k 是targetPosition，单边call了helper，而不是模板中双边都call helper，所以会更快，平均On而不是Onlogn
         if (position == n - k) return;
-        else if (position < n - k) divide(nums, position + 1, right, k);
-        else divide(nums, left, position - 1, k);
+        else if (position < n - k) divide(arr, position + 1, right, k);
+        else divide(arr, left, position - 1, k);
     }
 
-    private int partition(int[] nums, int left, int right) {
-        int pivot = nums[right];
+    private int partition(int[] arr, int left, int right) {
+        int pivot = arr[right];
         int wall = left;
         for (int i = left; i < right; i++) {
-            if (nums[i] < pivot) {
-                swap(nums, i, wall);
+            if (arr[i] < pivot) {
+                swap(arr, i, wall);
                 wall++;
             }
         }
-        swap(nums, wall, right);
+        swap(arr, wall, right);
         return wall;
     }
 
-    private void swap(int[] nums, int x, int y) {
-        int temp = nums[x];
-        nums[x] = nums[y];
-        nums[y] = temp;
+    private void swap(int[] arr, int x, int y) {
+        int temp = arr[x];
+        arr[x] = arr[y];
+        arr[y] = temp;
     }
 }

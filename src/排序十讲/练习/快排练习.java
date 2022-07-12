@@ -15,7 +15,6 @@ public class 快排练习 {
     public int partition(int[] arr, int left, int right) {
         int pivot = arr[right];
         int start = left, end = right - 1;
-
         while (start <= end) {
             if (arr[start] <= pivot) start++;
             else if (arr[end] > pivot) end--;
@@ -24,7 +23,6 @@ public class 快排练习 {
         swap(arr, start, right);
         return start;
     }
-
     public void swap(int[] arr, int x, int y) {
         int temp = arr[x];
         arr[x] = arr[y];

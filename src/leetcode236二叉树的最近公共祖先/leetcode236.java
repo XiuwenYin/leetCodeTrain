@@ -15,6 +15,6 @@ public class leetcode236 {
         //如果left为空，说明这两个节点在 root 结点的右子树上，我们只需要返回右子树查找的结果即可
         //如果left和right都不为空，说明这两个节点一个在 root 的左子树上一个在 root 的右子树上，
         //我们只需要返回 root 结点即可
-        return left == null ? root : right == null ? left : root;
+        return left == null ? right : right == null ? left : root;
     }
 }

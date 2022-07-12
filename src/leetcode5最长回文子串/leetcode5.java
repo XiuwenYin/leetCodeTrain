@@ -64,4 +64,27 @@ public class leetcode5 {
         }
         return lps;
     }
+
+    public String longestPalindrome02(String s) {
+        if (s.length() < 2) return s;
+        int n = s.length();
+        int start = 0;  //最长回文串的起点
+        int end = 0;    //最长回文串的终点
+        int len = 1;  //最长回文串的长度
+        boolean[][] dp = new boolean[n][n];
+
+        for (int right = 1; right < n; right++) {
+            for (int left = 0; left < right; left++) {
+                if (s.charAt(left) == s.charAt(right) && (right - left <= 2 || dp[left + 1][right - 1])) {
+                    dp[left][right] = true;
+                    if (right - left + 1 > len) {
+                        len = right - left + 1;
+                        start = left;
+                        end = right;
+                    }
+                }
+            }
+        }
+        return s.substring(start, end + 1);
+    }
 }

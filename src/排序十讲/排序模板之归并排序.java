@@ -14,11 +14,12 @@ public class 排序模板之归并排序 {
     }
 
     public int[] merge(int[] left, int[] right) {
-        int[] res = new int[] {left.length + right.length};
+        int[] res = new int[left.length + right.length];
         int i = 0, j = 0, k = 0;
         while (i < left.length && j < right.length) {
-            if (left[i] <= right[j]) res[k] = left[i++];
-            else res[k] = right[j++];
+            res[k++] = left[i] <= right[j] ? left[i++] : right[j++];
+//            if (left[i] <= right[j]) res[k++] = left[i++];
+//            else res[k++] = right[j++];
         }
         while (i < left.length) res[k++] = left[i++];
         while (j < right.length) res[k++] = right[j++];

@@ -10,6 +10,7 @@ public class leetcode3 {
      * 每次经历的 c = s.charAt(end)，找看看c在map中出现过没有，如果没有就把c为key，end为val放入
      * 如果出现过，那么代表子串已经开始重复了，就要重新开始定义start的位置，每次用Math.max
      * 并且每次循环都更新res的长度，也是用MAth.max
+     *
      * @param s
      * @return
      */
@@ -31,6 +32,7 @@ public class leetcode3 {
 
     /**
      * 使用set去重
+     *
      * @param s
      * @return
      */
@@ -47,17 +49,44 @@ public class leetcode3 {
         return res;
     }
 
+    /**
+     * 自己写的
+     * map + 滑动窗口
+     *
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring02(String s) {
+        int n = s.length();
+        char[] arr = s.toCharArray();
+        int res = 0;
+        int left = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            char c = arr[i];
+            map.put(c, map.getOrDefault(c, 0) + 1);
+            while (map.get(c) > 1) {
+                char temp = arr[left];
+                map.put(temp, map.get(temp) - 1);
+                left++;
+            }
 
-    public static void main(String[] args){
+            res = Math.max(res, i - left + 1);
+        }
+        return res;
+    }
+
+
+    public static void main(String[] args) {
 //        System.out.println("二维数组的列数：");
-        Scanner scan=new Scanner(System.in);
-        int r=scan.nextInt();
-        int c=scan.nextInt();
-        int[][]matrix=new int[r][c];
+        Scanner scan = new Scanner(System.in);
+        int r = scan.nextInt();
+        int c = scan.nextInt();
+        int[][] matrix = new int[r][c];
         scan.nextLine();//用来跳过行列后的回车符
-        for(int i=0;i<r;i++){
-            for(int j=0;j<c;j++){
-                matrix[i][j]=scan.nextInt();
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                matrix[i][j] = scan.nextInt();
 //                System.out.print(matrix[i][j]+",");
             }
 //            System.out.println("");

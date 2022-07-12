@@ -36,6 +36,7 @@ public class leetcode242 {
     }
     /**
      * 位运算：异或
+     * 无法通过
      */
     public boolean isAnagram03(String s, String t) {
         int res = 0;

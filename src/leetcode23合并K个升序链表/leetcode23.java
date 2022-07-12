@@ -25,7 +25,7 @@ public class leetcode23 {
     将每个链表都加入到堆中，然后利用堆的性质，对堆顶做弹出，弹出堆顶链表后再将链表指针后移，再添加入堆
      */
     public ListNode mergeKLists(ListNode[] lists) {
-        // 创建堆（优先队列），创建comparator，因为堆无法比较ListNode的大小
+        // 创建堆（优先队列），创建comparator，因为堆无法直接比较ListNode的大小
         PriorityQueue<ListNode> heap = new PriorityQueue<>((a, b) -> a.val - b.val);
         // 将所有的链表添加入堆中，堆会对链表头进行自动排序
         for (ListNode x : lists) {
@@ -40,14 +40,14 @@ public class leetcode23 {
         // 若堆非空，则表示排序弹出未结束
         while (!heap.isEmpty()) {
             // 弹出堆顶链表
-            ListNode top = heap.poll();
+            ListNode temp = heap.poll();
             // 将堆顶链表元素放入结果集中
-            cur.next = top;
+            cur.next = temp;
             // 指针后移
             cur = cur.next;
             // 如果弹出的链表不为空，则表示链表后面还有元素，再次添加入堆中
-            if (top.next != null) {
-                heap.offer(top.next);
+            if (temp.next != null) {
+                heap.offer(temp.next);
             }
         }
         return res.next;

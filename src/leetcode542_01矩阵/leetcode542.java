@@ -1,4 +1,4 @@
-package leetcode542;
+package leetcode542_01矩阵;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Queue;
 
 public class leetcode542 {
-    int[][] dirs = {{0, 1}, {1, 0}, {-1, 0}, {0, -1}};
+    int[][] dirts = {{0, 1}, {1, 0}, {-1, 0}, {0, -1}};
     List<Integer> x = new ArrayList<>();
     public int[][] updateMatrix(int[][] matrix) {
         int m = matrix.length, n = matrix[0].length;
@@ -16,26 +16,26 @@ public class leetcode542 {
         Queue<int[]> queue = new LinkedList<>();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (matrix[i][j] == 0) {
+                if (matrix[i][j] == 0) { // 先找到0的格子，放入q中，全部标记为visited
                     queue.offer(new int[]{i, j});
                     visited[i][j] = true;
                 }
             }
         }
-        int cost = 0;
+        int cost = 0; // 定义cost，0的格子自然为0；然后每层找1的格子，cost增加1并放入res
         while (!queue.isEmpty()) {
             int size = queue.size();
             for (int s = 0; s < size; s++) {
-                int[] cur = queue.poll();
-                int i = cur[0], j = cur[1];
-                if (matrix[i][j] == 1) {
-                    res[i][j] = cost;
+                int[] temp = queue.poll();
+                int x = temp[0], y = temp[1];
+                if (matrix[x][y] == 1) {
+                    res[x][y] = cost;
                 }
-                for (int[] dir : dirs) {
-                    int x = i + dir[0], y = j + dir[1];
-                    if (x >= 0 && x < m && y >= 0 && y < n && !visited[x][y]) {
-                        queue.offer(new int[]{x, y});
-                        visited[x][y] = true;
+                for (int[] dirt : dirts) {
+                    int nx = x + dirt[0], ny = y + dirt[1];
+                    if (nx >= 0 && nx < m && ny >= 0 && ny < n && !visited[nx][ny]) {
+                        queue.offer(new int[]{nx, ny});
+                        visited[nx][ny] = true;
                     }
                 }
             }
