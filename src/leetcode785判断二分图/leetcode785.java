@@ -34,4 +34,27 @@ public class leetcode785 {
         }
         return true;
     }
+
+    /**
+     * 练习
+     */
+    public boolean isBipartite01(int[][] graph) {
+        int m = graph.length;
+        int[] visited = new int[m];
+        for (int i = 0; i < m; i++) {
+            if (visited[i] == 0 && !dfs01(graph, i, 1, visited)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean dfs01(int[][] graph, int idx, int color, int[] visited) {
+        if (visited[idx] != 0) return visited[idx] == color;
+        visited[idx] = color;
+        for (int x : graph[idx]) {
+            if (!dfs(graph, x, -color, visited)) return false;
+        }
+        return true;
+    }
 }

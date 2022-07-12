@@ -46,8 +46,6 @@ public class leetcode56 {
         List<int[]> res = new ArrayList<>();
         // 先对数组进行第一位排序
         Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
-
-        res.add(intervals[0]);
         // 将数组第一个子数组当做对照组（指针）
         int[] cur = intervals[0];
         for (int[] x : intervals) {
