@@ -1,9 +1,16 @@
 package leetcode45跳跃游戏II;
 
 public class leetcode45 {
+    /**
+     * 贪心
+     * 正向查找可到达的最大位置
+     * 每次扫描一遍当前位置能达到的最大值，以此为界限，到达最大值的话就要再次起跳step++
+     * 不用管在哪里跳，只用关心能跳多远（因为题目默认一定能从任意格子跳到终点）
+     * @param nums
+     * @return
+     */
     public int jump(int[] nums) {
         /*
-
         题目说明：假设你总是可以到达数组的最后一个位置。
         即一定存在一条路线能够到达最后一个位置，而不是说中间没有 0 ，只是存在可以越过 0 的路线
 
@@ -26,7 +33,7 @@ public class leetcode45 {
         int step = 0;
         int end = 0;
         //这里有个小细节，因为是起跳的时候就 + 1 了，如果最后一次跳跃刚好到达了最后一个位置，那么遍历到最后一个位置的时候就会再次起跳，这是不允许的，因此不能遍历最后一个位置
-        for(int i = 0; i < nums.length - 1; i++){
+        for(int i = 0; i < nums.length - 1; i++){ // !!注意边界!!
             //一定跳得到，因此不存在 maxPosition < i
 
             maxPosition = Math.max(maxPosition, i + nums[i]);

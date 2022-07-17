@@ -1,11 +1,11 @@
 package leetcode1312让字符串成为回文串的最少插入次数;
 
 public class leetcode1312 {
-    /*
-    dp
-    类似 1143 题、 516 题
-    从右侧开始留下一位
-    i左移，j右移
+    /**
+     * dp
+     * 类似 1143 题、 516 题
+     * 从右侧开始留下一位
+     * i左移，j右移
      */
     public int minInsertions(String s) {
         int n = s.length();

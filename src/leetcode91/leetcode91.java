@@ -1,8 +1,8 @@
 package leetcode91;
 
 public class leetcode91 {
-    /*
-    dp 从右到左
+    /**
+     * dp 从右到左
      */
     public int numDecodings(String s) {
         int n = s.length();
@@ -27,8 +27,8 @@ public class leetcode91 {
         return res;
     }
 
-    /*
-    dp 从左到右
+    /**
+     * dp 从左到右
      */
     public int numDecodings01(String s) {
         int n = s.length();
@@ -37,14 +37,11 @@ public class leetcode91 {
         int[] dp = new int[n + 1];
         dp[0] = 1;
         for (int i = 1; i <= n; i++) {
-            int c1 = charArr[i] - '0';
-            int c2 = (charArr[i - 1] - '0') * 10 + (charArr[i] - '0');
-            if (1 <= c1 && c1 <= 9){
-                dp[i] = dp[i - 1];
-            }
-            if (10 <= c2 && c2 <= 26){
-                dp[i] += dp[i - 2];
-            }
+            int c1 = charArr[i] - '0'; // 取出当前位置的值
+            int c2 = (charArr[i - 1] - '0') * 10 + (charArr[i] - '0'); // 取出和前一位拼接在一起的值
+
+            if (c1 >= 1 && c1 <= 9) dp[i] = dp[i - 1];
+            if (c2 >= 10 && c2 <= 26) dp[i] += dp[i - 2]; // 注意这里，是+=
         }
         return dp[n];
     }

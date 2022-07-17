@@ -16,7 +16,7 @@ public class jianzhi12 {
         int m = board.length, n = board[0].length;
         if (row < 0 || row >= m || col < 0 || col >= n || board[row][col] != arr[index]) return false;
         if (index == arr.length - 1) return true;
-        board[row][col] = ' ';
+        board[row][col] = ' '; // 防止走回头路
 
         boolean res = dfs(board, arr, row + 1, col, index + 1)
                 || dfs(board, arr, row - 1, col, index + 1)

@@ -4,7 +4,11 @@ import java.util.Arrays;
 import java.util.OptionalInt;
 
 public class leetcode53 {
-    // 动态规划，遍历时每次都更新当前数据
+    /** 动态规划，遍历时每次都更新当前数据
+     *
+     * @param nums
+     * @return
+     */
     public int maxSubArray(int[] nums) {
         int[] dp = new int[nums.length];
         dp[0] = nums[0];

@@ -17,8 +17,8 @@ public class leetcode17 {
             put('8', "tuv");
             put('9', "wxyz");
         }};
-        List<String> res = new ArrayList<>();
-        if (digits == null) return res;
+        List<String> res = new ArrayList<String>();
+        if (digits.length() == 0) return res;
         backtracking(res, digits, 0, new StringBuilder(), map);
         return res;
     }
@@ -31,9 +31,9 @@ public class leetcode17 {
         }
         char c = digits.charAt(idx);
         String level = map.get(c);
-        for (int i = idx; i < level.length(); i++) {
+        for (int i = 0; i < level.length(); i++) { // 从0起，每次从level中拿出一个加入sb后permute，之后再删除这个，下一轮循环拿取下一个
             sb.append(level.charAt(i)); // 剪枝，直接在添加过程中进行permutation，就不需要单独拉扯出来进行permutation了
-            backtracking(res, digits, i + 1, sb, map);
+            backtracking(res, digits, idx + 1, sb, map);
             sb.deleteCharAt(idx);
         }
     }

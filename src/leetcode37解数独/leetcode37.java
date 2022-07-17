@@ -10,7 +10,7 @@ public class leetcode37 {
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (board[i][j] == '.') {
-                    for (char k = '1'; k <= '9'; k++) {
+                    for (char k = '1'; k <= '9'; k++) { // 注意范围
                         if (isValid(board, i, j, k)) {
                             board[i][j] = k;
                             if (solve(board)) {

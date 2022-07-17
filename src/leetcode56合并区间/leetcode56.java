@@ -1,9 +1,6 @@
 package leetcode56合并区间;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class leetcode56 {
     /**
@@ -34,6 +31,39 @@ public class leetcode56 {
         return Arrays.copyOf(res, idx + 1);
     }
 
+    public int[][] merge01(int[][] intervals) {
+        // 1. 对区间左边的值进行比较
+        Arrays.sort(intervals, new Comparator<int[]>() { // 重写 Comparator接口
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[0] - o2[0]; // 对两个区间的第一个值进行比较，前者比后者大，结果为正；前者比后者小，结果为负
+            }
+        });
+
+        // 2. 初始化 outputs，存储合并区间之后的区间的动态数组
+        ArrayList<int[]> outputs = new ArrayList<>();
+
+        // 3. 遍历处理每一个区间
+        for (int i = 0 ; i < intervals.length ; i++) {
+            int[] currIntervals = intervals[i];
+            if (outputs.isEmpty()) {
+                outputs.add(currIntervals);
+            } else { // 判断是否有重叠，有就合并
+                int[] outputLastIntervals = outputs.get(outputs.size() - 1);
+                int outputLastIntervalsRight = outputLastIntervals[1];
+                int currLeft = currIntervals[0];
+                if (currLeft > outputLastIntervalsRight) { // 无重叠
+                    outputs.add(currIntervals);
+                } else { // 重叠情况，合并
+                    int currRight = currIntervals[1];
+                    outputLastIntervals[1] = Math.max(currRight, outputLastIntervalsRight);
+                }
+
+            }
+        }
+        return outputs.toArray(new int[outputs.size()][]);
+    }
+
     /**
      * 和上面类似，但更推荐这种做法，更容易懂
      * 扫描线
@@ -41,7 +71,7 @@ public class leetcode56 {
      * @param intervals
      * @return
      */
-    public int[][] merge01(int[][] intervals) {
+    public int[][] merge02(int[][] intervals) {
         int n = intervals.length;
         List<int[]> res = new ArrayList<>();
         // 先对数组进行第一位排序
@@ -61,6 +91,6 @@ public class leetcode56 {
         }
         // 将最后一位指针结果加入结果集
         res.add(cur);
-        return res.toArray(new int[0][]);
+        return res.toArray(new int[0][]); // 注意这里的是0
     }
 }
