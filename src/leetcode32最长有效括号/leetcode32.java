@@ -14,10 +14,10 @@ public class leetcode32 {
         int n = s.length();
         Deque<Integer> stack = new LinkedList<>();
         stack.push(-1); // 先在栈中压入-1
-        int maxLen = 0;
+        int max = 0;
         for (int i = 0; i < n; i++) {
             char c = s.charAt(i);
-            int localLen = 0;
+            int local = 0;
             if (c == '(') stack.push(i); // 如果当前char为(，则直接压入栈中
             else { // 如果不是，则弹出当前栈顶元素
                 stack.pop();
@@ -25,11 +25,11 @@ public class leetcode32 {
                     stack.push(i);
                 } else { // 如果不为空，则计算当前局部最长，再和max取最大
                     /* !!重点在这!! */
-                    localLen = i - stack.peek();
-                    maxLen = Math.max(maxLen, localLen);
+                    local = i - stack.peek();
+                    max = Math.max(max, local);
                 }
             }
         }
-        return maxLen;
+        return max;
     }
 }

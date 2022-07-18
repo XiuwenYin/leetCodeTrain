@@ -1,5 +1,7 @@
 package leetcode21;
 
+import java.util.PriorityQueue;
+
 // 合并两个有序链表
 class ListNode {
     int val;
@@ -34,7 +36,7 @@ public class leetcode21 {
             if (list1.val <= list2.val) {
                 prev.next = list1;
                 list1 = list1.next;
-            }else {
+            } else {
                 prev.next = list2;
                 list2 = list2.next;
             }
@@ -46,4 +48,32 @@ public class leetcode21 {
         // 返回哨兵节点的下一位，因为第一位是-1
         return preHead.next;
     }
+
+    /**
+     * 优先队列（小顶堆）
+     * ！！推荐用这个！！
+     * 好理解
+     * 先将list1和list2塞入pq，然后弹出堆顶元素挂载在dummyHead的指针cur上
+     * 然后查看弹出的堆顶元素是否有next，有的话就继续塞入pq，直到pq为空为止
+     *
+     * @param list1
+     * @param list2
+     * @return
+     */
+    public ListNode mergeTwoLists01(ListNode list1, ListNode list2) {
+        if (list1 == null || list2 == null) return list1 == null ? list2 : list1; // 添加了边界值判断，防止阴间测试用例gank
+        ListNode dummyHead = new ListNode(0);
+        ListNode cur = dummyHead;
+        PriorityQueue<ListNode> pq = new PriorityQueue<>((a, b) -> a.val - b.val);
+        pq.offer(list1);
+        pq.offer(list2);
+        while (!pq.isEmpty()) {
+            ListNode temp = pq.poll();
+            cur.next = temp;
+            cur = cur.next;
+            if (temp.next != null) pq.offer(temp.next);
+        }
+        return dummyHead.next;
+    }
 }
+

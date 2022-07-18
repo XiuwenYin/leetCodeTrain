@@ -19,6 +19,12 @@ class ListNode {
 }
 
 public class leetcode19 {
+    /**
+     * 双指针
+     * @param head
+     * @param n
+     * @return
+     */
     public ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode dummyHead = new ListNode();
         dummyHead.val = 0;
@@ -32,6 +38,26 @@ public class leetcode19 {
             prev = prev.next;
         }
         prev.next = prev.next.next;
+        return dummyHead.next;
+    }
+
+    /**
+     * 朴素计数
+     */
+    public ListNode removeNthFromEnd01(ListNode head, int n) {
+        ListNode dummyHead = new ListNode(0, head);
+        ListNode slow = dummyHead, fast = dummyHead;
+        int cnt = 0;
+        while (fast != null) {
+            fast = fast.next;
+            cnt++;
+        }
+        int loc = cnt - n - 1;
+        while (loc != 0) {
+            slow = slow.next;
+            loc--;
+        }
+        slow.next = slow.next.next;
         return dummyHead.next;
     }
 }
