@@ -1,7 +1,5 @@
-package leetcode389;
+package leetcode389找不同;
 
-import java.util.HashMap;
-import java.util.Map;
 // 找不同
 public class leetcode389 {
     /**
@@ -12,10 +10,10 @@ public class leetcode389 {
         for (int i = 0; i < s.length(); i++) {
             sum1 += s.charAt(i);
         }
-        for (int i = 0; i< t.length(); i++) {
+        for (int i = 0; i < t.length(); i++) {
             sum2 += t.charAt(i);
         }
-        return (char)(sum2 - sum1);
+        return (char) (sum2 - sum1);
     }
 
     /**
@@ -29,6 +27,16 @@ public class leetcode389 {
         for (int i = 0; i < t.length(); i++) {
             res ^= t.charAt(i);
         }
-        return (char)res;
+        return (char) res;
+    }
+
+    /**
+     * 异或（短小精悍版）
+     */
+    public char findTheDifference02(String s, String t) {
+        char cur = 0;
+        for (char c : s.toCharArray()) cur ^= c;
+        for (char c : t.toCharArray()) cur ^= c;
+        return cur;
     }
 }

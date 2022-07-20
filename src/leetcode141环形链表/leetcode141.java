@@ -70,6 +70,23 @@ public class leetcode141 {
     }
 
 
+    /**
+     * 快慢指针
+     * 但是把起点都改成了head
+     */
+    public boolean hasCycle04(ListNode head) {
+        if (head == null || head.next == null) return false;
+        ListNode slow = head, fast = head;
+        do {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) return true;
+        }
+        while (fast != null && fast.next != null);
+        return false;
+    }
+
+
 
 
 
