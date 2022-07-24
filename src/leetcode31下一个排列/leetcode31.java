@@ -32,3 +32,37 @@ public class leetcode31 {
         arr[y] = temp;
     }
 }
+
+class Solution {
+    /**
+     * 最快
+     */
+    public void nextPermutation(int[] nums) {
+        int i = nums.length - 2;
+        while (i >= 0 && nums[i] >= nums[i + 1]) {
+            i--;
+        }
+        if (i >= 0) { // 注意边界
+            int j = nums.length - 1;
+            while (j > i && nums[i] >= nums[j]) { // 注意边界
+                j--;
+            }
+            swap(nums, i, j);
+        }
+        reverse(nums, i + 1, nums.length - 1);
+    }
+
+    public void swap(int[] arr, int x, int y) {
+        int temp = arr[x];
+        arr[x] = arr[y];
+        arr[y] = temp;
+    }
+
+    public void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            swap(nums, start, end);
+            start++;
+            end--;
+        }
+    }
+}

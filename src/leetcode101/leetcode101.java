@@ -30,13 +30,13 @@ public class leetcode101 {
         if (root == null) {
             return true;
         }
-        return BFS(root, root);
+        return dfs(root, root);
     }
-    public boolean BFS(TreeNode t1, TreeNode t2){
+    public boolean dfs(TreeNode t1, TreeNode t2){
         if (t1 == null && t2 == null) return true;
         if (t1 == null || t2 == null) return false;
         if (t1.val != t2.val) return false;
-        return BFS(t1.left, t2.right) && BFS(t1.right, t2.left);
+        return dfs(t1.left, t2.right) && dfs(t1.right, t2.left);
     }
 
     /**
@@ -49,7 +49,7 @@ public class leetcode101 {
         Queue<TreeNode> queue = new LinkedList<TreeNode>();
         queue.offer(root);
         queue.offer(root);
-        while (!queue.isEmpty()) {
+        while (!queue.isEmpty()) { // 可加size也可不加
             TreeNode temp1 = queue.poll();
             TreeNode temp2 = queue.poll();
             // 重点：如果判断通过，直接continue

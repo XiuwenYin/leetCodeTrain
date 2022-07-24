@@ -11,6 +11,7 @@ public class leetcode7 {
     public int reverse(int x) {
         int res = 0;
         while (x != 0) {
+            // 可以这么理解：temp是新reverse，res是老reverse，那么temp / 10 应该等于 res, 如果不等则表示溢出
             int temp = res * 10 + x % 10;
             if (temp / 10 != x) return 0; // 防止溢出
             res = temp;

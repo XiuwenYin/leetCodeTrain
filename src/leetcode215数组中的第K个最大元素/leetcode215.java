@@ -64,3 +64,43 @@ public class leetcode215 {
         arr[y] = temp;
     }
 }
+
+/**
+ * 自己写的快速排序
+ */
+class Solution {
+    int k;
+    int n;
+    public int findKthLargest(int[] nums, int k) {
+        this.k = k;
+        this.n = nums.length;
+        quicksort(nums);
+        return nums[nums.length - k];
+    }
+    public void quicksort(int[] nums) {
+        helper(nums, 0, nums.length - 1);
+    }
+    public void helper(int[] arr, int left, int right) {
+        if (left >= right) return;
+        int pivot = partition(arr, left, right);
+        if (pivot == n - k) return;
+        helper(arr, left, pivot - 1);
+        helper(arr, pivot + 1, right);
+    }
+    public int partition(int[] arr, int left, int right) {
+        int pivot = arr[right];
+        int start = left, end = right - 1;
+        while (start <= end) {
+            if (arr[start] <= pivot) start++;
+            else if (arr[end] > pivot) end--;
+            else swap(arr, start++, end--);
+        }
+        swap(arr, start, right);
+        return start;
+    }
+    public void swap(int[] arr, int x, int y) {
+        int temp = arr[x];
+        arr[x] = arr[y];
+        arr[y] = temp;
+    }
+}

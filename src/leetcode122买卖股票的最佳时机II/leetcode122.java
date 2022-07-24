@@ -17,4 +17,18 @@ public class leetcode122 {
         }
         return dp[n - 1][0];
     }
+
+    /**
+     * 与其写状态，不如直接贪心，只要第二天比前一天贵就卖
+     */
+    public int maxProfit01(int[] prices) {
+        int n = prices.length;
+        int res = 0;
+        for (int i = 1; i < n; i++) {
+            if (prices[i] > prices[i - 1]) {
+                res += prices[i] - prices[i - 1];
+            }
+        }
+        return res;
+    }
 }

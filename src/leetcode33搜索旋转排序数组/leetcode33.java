@@ -3,16 +3,15 @@ package leetcode33搜索旋转排序数组;
 public class leetcode33 {
     /**
      * 二分
-     * 分段讨论
-     * @param nums
-     * @param target
-     * @return
+     * 分段讨论（画图出来很清晰）
+     * 永远在单调区间内寻找答案，否则就切短当前区间，再重新计算mid寻找有序区间
+     * 无论旋转多少次，永远有一段是单调递增，所以无论转多少次都是一样的
      */
     public int search(int[] nums, int target) {
         int len = nums.length;
         if (len == 0) return -1;
         int left = 0, right = len - 1;
-        while (left <= right) {
+        while (left <= right) { // 注意边界
             // 1. 首先明白，旋转数组后，从中间划分，一定有一边是有序的。
             // 2. 由于一定有一边是有序的，所以根据有序的两个边界值来判断目标值在有序一边还是无序一边
             // 3. 这题找目标值，遇到目标值即返回

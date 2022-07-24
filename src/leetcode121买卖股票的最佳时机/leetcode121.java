@@ -26,4 +26,33 @@ public class leetcode121 {
         // 返回最后一天不持股的现金数量
         return dp[n - 1][0];
     }
+
+    /**
+     * dp练习
+     */
+    public int maxProfit01(int[] prices) {
+        int n = prices.length;
+        int[][] dp = new int[n][2];
+        dp[0][0] = 0;
+        dp[0][1] = -prices[0];
+        for (int i = 1; i < n; i++) {
+            dp[i][0] = Math.max(dp[i - 1][1] + prices[i], dp[i - 1][0]);
+            dp[i][1] = Math.max(-prices[i], dp[i - 1][1]);
+        }
+        return dp[n - 1][0];
+    }
+
+    /**
+     * 最快
+     *
+     */
+    public int maxProfit02(int[] prices) {
+        int min = Integer.MAX_VALUE;
+        int res = 0;
+        for (int price : prices) {
+            if (price < min) min = price; // 更新最小价格
+            else res = Math.max(res, price - min); // 如果超过最小价格则卖出，每次取max
+        }
+        return res;
+    }
 }
