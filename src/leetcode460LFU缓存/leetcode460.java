@@ -96,7 +96,7 @@ class LFUCache {
             if (size == capacity) { // 如果当前容量不足，则开始删除最不经常使用的节点
                 DoubleLinkedList minFreqLinkedList = freqMap.get(min); // 从频次表获取最不经常使用的双向链表
                 cache.remove(minFreqLinkedList.tail.pre.key); // 从缓存map中移除最不经常使用的node，即为tail指针的前一位
-                minFreqLinkedList.removeNode(minFreqLinkedList.tail.pre); // 这里不需要维护min, 因为下面add了newNode后min肯定是1
+                minFreqLinkedList.removeNode(minFreqLinkedList.tail.pre); // 这里不需要维护min, 因为下面add了newNode后min肯定是1；或者实现一个removeTail()方法，在LRU中有写
                 size--; // 更新size
             }
             // 如果容量充足或者已经删除完最不经常使用的节点之后

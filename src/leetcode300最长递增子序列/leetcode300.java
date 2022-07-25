@@ -8,6 +8,7 @@ public class leetcode300 {
     /**
      * dp
      * O(n2)
+     *
      * @param nums
      * @return
      */
@@ -30,6 +31,7 @@ public class leetcode300 {
 
     /**
      * 构造sub-sequence
+     *
      * @param nums
      * @return
      */
@@ -52,6 +54,7 @@ public class leetcode300 {
     /**
      * 构造sub-sequence + 二分查找
      * 前面都一样
+     *
      * @param nums
      * @return
      */
@@ -77,7 +80,7 @@ public class leetcode300 {
             int cur = list.get(mid);
             if (cur < target) {
                 left = mid + 1;
-            } else if (cur >= target){
+            } else if (cur >= target) {
                 right = mid - 1;
             } else {
                 return mid;
@@ -85,4 +88,27 @@ public class leetcode300 {
         }
         return left;
     }
+
+
+    /**
+     * 用这个
+     * 通过把每次后面更大的调到前面
+     */
+    public int lengthOfLIS03(int[] nums) {
+        int n = nums.length;
+        int left = 0;
+        for (int i = 1; i < n; i++) {
+            if (nums[i] > nums[left]) {
+                nums[++left] = nums[i];
+            } else {
+                int k = left;
+                while (k >= 0 && nums[k] >= nums[i]) {
+                    k--;
+                }
+                nums[k + 1] = nums[i];
+            }
+        }
+        return left + 1;
+    }
+
 }
