@@ -1,9 +1,4 @@
-package leetcode48;
-
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.List;
+package leetcode48旋转图像;
 
 public class leetcode48 {
     public void rotate(int[][] matrix) {
