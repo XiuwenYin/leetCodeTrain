@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 
 public class leetcode137 {
     /**
-     * 位运算（记不住的，老老实实计数法吧）
+     * 位运算（记不住的，老老实实计数法吧）（最速）
      *
      * @param nums
      * @return

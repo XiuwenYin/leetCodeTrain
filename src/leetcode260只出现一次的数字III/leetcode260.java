@@ -3,13 +3,14 @@ package leetcode260只出现一次的数字III;
 public class leetcode260 {
     /**
      * 位运算（记不住，老实哈希表计数吧）
+     *
      * @param nums
      * @return
      */
     public int[] singleNumber(int[] nums) {
-        int xorsum = 0;
+        int xor = 0; // 定义异或
         for (int num : nums) {
-            xorsum ^= num;
+            xor ^= num;
         }
 
         // 为什么要取最低有效位？
@@ -42,7 +43,7 @@ public class leetcode260 {
         // 防止溢出
         // 因为二进制有正负0，负零用于多表示一位负数，这个负数如果取相反数，会产生溢出，所以不能用 a & (-a) 取最低有效位
         // 负0的特点是第一位是1，其余位是0，所以它的最低有效位就是自己
-        int lsb = (xorsum == Integer.MIN_VALUE ? xorsum : xorsum & (-xorsum));
+        int lsb = (xor == Integer.MIN_VALUE ? xor : xor & (-xor));
         int type1 = 0, type2 = 0;
         for (int num : nums) {
             if ((num & lsb) != 0) {
@@ -53,4 +54,33 @@ public class leetcode260 {
         }
         return new int[]{type1, type2};
     }
+
+
+    /**
+     * ！！最速解法！！
+     * @param nums
+     * @return
+     */
+    public int[] singleNumber02(int[] nums) {
+        int ret = 0;
+        for (int i : nums) {
+            ret ^= i;
+        }
+        // 取到ret最右边的一个1的位置
+        int rightOne = ret & (~ret + 1);
+
+        int temp = 0;
+        for (int i : nums) {
+            if ((rightOne & i) != 0) {
+                temp ^= i;
+            }
+        }
+
+        int[] result = new int[2];
+        result[0] = temp;
+        result[1] = ret ^ temp;
+        return result;
+
+    }
+
 }

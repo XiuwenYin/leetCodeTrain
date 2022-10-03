@@ -76,6 +76,55 @@ public class leetcode3 {
         return res;
     }
 
+    /**
+     * 练习一下
+     *
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring03(String s) {
+        int n = s.length();
+        Map<Character, Integer> map = new HashMap<>();
+        int left = 0;
+        int res = 0;
+        for (int i = 0; i < n; i++) {
+            char c = s.charAt(i);
+            map.put(c, map.getOrDefault(c, 0) + 1);
+            while (map.get(c) > 1) {
+                char temp = s.charAt(left);
+                map.put(temp, map.get(temp) - 1);
+                left++;
+            }
+            res = Math.max(res, i - left + 1);
+        }
+        return res;
+    }
+
+
+    /**
+     * ！！最优解！！
+     *
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring04(String s) {
+        if (s.length() <= 1) {
+            return s.length();
+        }
+        int left = 0, res = 1;
+        char[] arr = s.toCharArray();
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = left; j < i; j++) {
+                if (arr[i] == arr[j]) {
+                    left = j + 1;
+                    break;
+                }
+            }
+            res = Math.max(res, (i - left + 1));
+        }
+        return res;
+    }
+
 
     public static void main(String[] args) {
 //        System.out.println("二维数组的列数：");

@@ -82,7 +82,7 @@ public class leetcode15 {
         int left, right, sum, num;
         for (int i = 0; i < nums.length; i++) {
             num = nums[i];
-            if (num > 0) {
+            if (num > 0) { // 剪枝
                 break;
             }
             if (i > 0 && num == nums[i - 1]) continue; // 去重
